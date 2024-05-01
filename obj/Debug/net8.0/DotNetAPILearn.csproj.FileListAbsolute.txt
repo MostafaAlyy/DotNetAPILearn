@@ -68,3 +68,4 @@ D:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\runtimes\win-arm64\native\Micros
 D:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
+d:\Backend\.NET\DotNetAPILearn\obj\Debug\net8.0\DotNetAPILearn.sourcelink.json

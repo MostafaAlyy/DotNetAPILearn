@@ -2529,11 +2529,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Backend\\.NET\\DotNetAPILearn\\DotNetAPILearn.csproj",
+      "projectUniqueName": "D:\\Backend\\.NET\\DotNetAPILearn\\DotNetAPILearn.csproj",
       "projectName": "DotNetAPILearn",
-      "projectPath": "d:\\Backend\\.NET\\DotNetAPILearn\\DotNetAPILearn.csproj",
+      "projectPath": "D:\\Backend\\.NET\\DotNetAPILearn\\DotNetAPILearn.csproj",
       "packagesPath": "C:\\Users\\mosta\\.nuget\\packages\\",
-      "outputPath": "d:\\Backend\\.NET\\DotNetAPILearn\\obj\\",
+      "outputPath": "D:\\Backend\\.NET\\DotNetAPILearn\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mosta\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -2600,7 +2600,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

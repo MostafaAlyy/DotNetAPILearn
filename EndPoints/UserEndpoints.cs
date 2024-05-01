@@ -1,3 +1,4 @@
+using DotnetAPI.Models;
 using DotNetAPI.Data;
 
 public static class UserEndPoints
@@ -7,8 +8,9 @@ public static class UserEndPoints
 
     public static void MapUserEndPoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("users").WithTags("Minimart API");
-        group.MapGet("/users/{name}", (string name) => GetUsers(name));
+        var group = app.MapGroup("users").WithTags("Minimal API");
+        group.MapGet("/users", (IConfiguration config) => GetUsers(config));
+        group.MapGet("/user", (IConfiguration config, int userId) => GetSingleUsers(config, userId));
         group.MapGet("/testConnection", (IConfiguration config) => TestConnection(config));
     }
 
@@ -20,13 +22,34 @@ public static class UserEndPoints
         return dataContextDapper.LoadDataSingle<DateTime>("SELECT GETDATE()");
     }
 
-    private static IEnumerable<UserModel> GetUsers(String name)
+    public static IEnumerable<User> GetUsers(IConfiguration config)
     {
-        return new List<UserModel>
-        {
-            new UserModel { Id = 1, Name = "John Doe" },
-            new UserModel { Id = 2, Name = name },
-            new UserModel { Id = 3, Name = "Mostafa Ali" }
-        };
+        DataContextDapper dataContextDapper = new DataContextDapper(config);
+        string sql = @"
+        SELECT [UserId]
+            ,[FirstName]
+            ,[LastName]
+            ,[Email]
+            ,[Gender]
+            ,[Active]
+        FROM [TutorialAppSchema].[Users]";
+        return dataContextDapper.LoadData<User>(sql);
+
+    }
+
+    public static User GetSingleUsers(IConfiguration config, int userId)
+    {
+        DataContextDapper dataContextDapper = new DataContextDapper(config);
+
+        string sql = @"
+            SELECT [UserId]
+                ,[FirstName]
+                ,[LastName]
+                ,[Email]
+                ,[Gender]
+                ,[Active]
+            FROM [TutorialAppSchema].[Users]
+            WHERE UserId = " + userId.ToString();
+        return dataContextDapper.LoadDataSingle<User>(sql);
     }
 }

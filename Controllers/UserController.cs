@@ -1,3 +1,4 @@
+using DotnetAPI.Models;
 using DotNetAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,17 +20,31 @@ public class UserController : ControllerBase
         return _dapper.LoadDataSingle<DateTime>("SELECT GETDATE()");
     }
 
-    [HttpGet("GetUsers/{testValue}")]
-    // public IEnumerable<User> GetUsers()
-    public string[] GetUsers(string testValue)
+    [HttpGet("GetUsers")]
+    public IEnumerable<User> GetUsers()
     {
-        return new string[] {"user1", "user2", testValue };
-        // return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        // {
-        //     Date = DateTime.Now.AddDays(index),
-        //     TemperatureC = Random.Shared.Next(-20, 55),
-        //     Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        // })
-        // .ToArray();
+        string sql = @"
+        SELECT [UserId]
+            ,[FirstName]
+            ,[LastName]
+            ,[Email]
+            ,[Gender]
+            ,[Active]
+        FROM [TutorialAppSchema].[Users]";
+        return _dapper.LoadData<User>(sql);
+    }
+    [HttpGet("GetSingleUsers/{userId}")]
+    public User GetSingleUsers(int userId)
+    {
+        string sql = @"
+            SELECT [UserId]
+                ,[FirstName]
+                ,[LastName]
+                ,[Email]
+                ,[Gender]
+                ,[Active]
+            FROM [TutorialAppSchema].[Users]
+            WHERE UserId = " + userId.ToString();
+        return _dapper.LoadDataSingle<User>(sql);
     }
 }
