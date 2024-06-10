@@ -11,6 +11,7 @@ public static class UserEndPoints
         var group = app.MapGroup("users").WithTags("Minimal API");
         group.MapGet("/users", (IConfiguration config) => GetUsers(config));
         group.MapGet("/user", (IConfiguration config, int userId) => GetSingleUsers(config, userId));
+        group.MapPut("/updateUser", (IConfiguration config, User user) => UpdateUser(config, user));
         group.MapGet("/testConnection", (IConfiguration config) => TestConnection(config));
     }
 
@@ -51,5 +52,21 @@ public static class UserEndPoints
             FROM [TutorialAppSchema].[Users]
             WHERE UserId = " + userId.ToString();
         return dataContextDapper.LoadDataSingle<User>(sql);
+    }
+
+    public static void UpdateUser(IConfiguration config, User user)
+    {
+        DataContextDapper dataContextDapper = new DataContextDapper(config);
+        string sql = $@"
+            UPDATE  TutorialAppSchema.Users 
+            SET FirstName='{user.FirstName}',
+                LastName='{user.LastName}',
+                Email='{user.Email}',
+                Gender='{user.Gender}',
+                Active={user.Active}
+            WHERE UserId ={user.Id}";
+
+        if (!dataContextDapper.ExecuteSql(sql))
+            throw new Exception("Failed to add user");
     }
 }

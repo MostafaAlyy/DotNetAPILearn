@@ -47,4 +47,58 @@ public class UserController : ControllerBase
             WHERE UserId = " + userId.ToString();
         return _dapper.LoadDataSingle<User>(sql);
     }
+
+    [HttpPost("AddUser")]
+    public IActionResult AddUser(UserDto user)
+    {
+        string sql = $@"
+            INSERT INTO TutorialAppSchema.Users (
+                    FirstName
+                    ,LastName
+                    ,Email
+                    ,Gender
+                    ,Active)
+            VALUES (
+                    '{user.FirstName}'
+                    ,'{user.LastName}'
+                    ,'{user.Email}'
+                    ,'{user.Gender}'
+                    ,{user.Active}
+                );";
+        if (_dapper.ExecuteSql(sql))
+            return Ok();
+
+        throw new Exception("Failed to add user");
+
+    }
+
+    [HttpPut("UpdateUser")]
+    public IActionResult UpdateUser(User user)
+    {
+        string sql = $@"
+            UPDATE  TutorialAppSchema.Users 
+            SET FirstName='{user.FirstName}',
+                LastName='{user.LastName}',
+                Email='{user.Email}',
+                Gender='{user.Gender}',
+                Active={user.Active}
+            WHERE UserId ={user.Id}";
+        if (_dapper.ExecuteSql(sql))
+            return Ok();
+
+        throw new Exception("Failed to update user");
+    }
+
+    [HttpDelete("DeleteUser/{userId}")]
+    public IActionResult DeleteUser(int userId)
+    {
+        string sql = $@"
+            DELETE FROM TutorialAppSchema.Users
+            WHERE UserId = {userId};";
+
+        if (_dapper.ExecuteSql(sql))
+            return Ok();
+
+        throw new Exception("Failed to add user");
+    }
 }
