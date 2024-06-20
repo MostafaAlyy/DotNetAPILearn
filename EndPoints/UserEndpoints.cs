@@ -1,5 +1,5 @@
-using DotnetAPI.Models;
-using DotNetAPI.Data;
+using DotNetAPILearn.Models;
+using DotNetAPILearn.Data;
 
 public static class UserEndPoints
 {

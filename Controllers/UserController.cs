@@ -1,8 +1,9 @@
-using DotnetAPI.Models;
-using DotNetAPI.Data;
+using DotNetAPILearn.Models;
+using DotNetAPILearn.Data;
 using Microsoft.AspNetCore.Mvc;
+using DotNetAPILearn.Dtos;
 
-namespace DotnetAPI.Controllers;
+namespace DotNetAPILearn.Controllers;
 
 [ApiController]
 [Route("[controller]")]

@@ -1,4 +1,4 @@
-namespace DotnetAPI.Models
+namespace DotNetAPILearn.Dtos
 {
     public class UserDto
     {
