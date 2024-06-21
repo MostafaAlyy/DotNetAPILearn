@@ -16,7 +16,8 @@ namespace DotNetAPILearn.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(_config.GetConnectionString("DefaultConnection"),
+                optionsBuilder.
+                    UseSqlServer(_config.GetConnectionString("DefaultConnection"),
                     optionsBuilder => optionsBuilder.EnableRetryOnFailure());
             }
         }
@@ -26,13 +27,13 @@ namespace DotNetAPILearn.Data
             modelBuilder.HasDefaultSchema("TutorialAppSchema");
 
             modelBuilder.Entity<User>()
-               .ToTable("Users", "TutorialAppSchema").HasKey(u => u.Id);
+               .ToTable("Users", "TutorialAppSchema").HasKey(u => u.UserId);
 
             modelBuilder.Entity<UserSalary>()
-               .ToTable("UserSalary", "TutorialAppSchema").HasKey(u => u.Id);
+               .ToTable("UserSalary", "TutorialAppSchema").HasKey(u => u.UserId);
 
             modelBuilder.Entity<UserJobInfo>()
-               .ToTable("UserJobInfo", "TutorialAppSchema").HasKey(u => u.Id);
+               .ToTable("UserJobInfo", "TutorialAppSchema").HasKey(u => u.UserId);
         }
 
 

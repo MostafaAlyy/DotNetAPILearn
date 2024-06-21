@@ -83,7 +83,7 @@ public class UserController : ControllerBase
                 Email='{user.Email}',
                 Gender='{user.Gender}',
                 Active={user.Active}
-            WHERE UserId ={user.Id}";
+            WHERE UserId ={user.UserId}";
         if (_dapper.ExecuteSql(sql))
             return Ok();
 
@@ -100,6 +100,6 @@ public class UserController : ControllerBase
         if (_dapper.ExecuteSql(sql))
             return Ok();
 
-        throw new Exception("Failed to add user");
+        throw new Exception("Failed to delete user");
     }
 }

@@ -69,3 +69,16 @@ D:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\runtimes\win-x64\native\Microsof
 D:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 D:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
 d:\Backend\.NET\DotNetAPILearn\obj\Debug\net8.0\DotNetAPILearn.sourcelink.json
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll

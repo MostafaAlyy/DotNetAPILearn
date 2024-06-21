@@ -1,13 +1,32 @@
 namespace DotNetAPILearn.Models
 {
-    public class User
+ public partial class User
     {
-        public required int Id { get; set; }
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
-        public required string Email { get; set; }
-        public required string Gender { get; set; }
-        public required string Active { get; set; }
+        public int UserId {get; set;}
+        public string FirstName {get; set;}
+        public string LastName {get; set;}
+        public string Email {get; set;}
+        public string Gender {get; set;}
+        public bool Active {get; set;}
 
+        public User()
+        {
+            if (FirstName == null)
+            {
+                FirstName = "";
+            }
+            if (LastName == null)
+            {
+                LastName = "";
+            }
+            if (Email == null)
+            {
+                Email = "";
+            }
+            if (Gender == null)
+            {
+                Gender = "";
+            }
+        }
     }
 }

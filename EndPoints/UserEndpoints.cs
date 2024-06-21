@@ -64,7 +64,7 @@ public static class UserEndPoints
                 Email='{user.Email}',
                 Gender='{user.Gender}',
                 Active={user.Active}
-            WHERE UserId ={user.Id}";
+            WHERE UserId ={user.UserId}";
 
         if (!dataContextDapper.ExecuteSql(sql))
             throw new Exception("Failed to add user");

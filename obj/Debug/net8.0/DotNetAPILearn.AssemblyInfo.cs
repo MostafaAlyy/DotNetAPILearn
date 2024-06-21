@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DotNetAPILearn")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+637a62c0565f88dd4517ea23964db5193b942724")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+205fa4f0832361aa9750699abb7d95da7a384d3b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DotNetAPILearn")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DotNetAPILearn")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
