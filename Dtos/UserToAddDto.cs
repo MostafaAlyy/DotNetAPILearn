@@ -1,6 +1,6 @@
 namespace DotNetAPILearn.Dtos
 {
-    public class UserDto
+    public class UserToAddDto
     {
         public required string FirstName { get; set; }
         public required string LastName { get; set; }

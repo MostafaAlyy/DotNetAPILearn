@@ -2,19 +2,21 @@ using DotNetAPILearn.Models;
 using DotNetAPILearn.Data;
 using Microsoft.AspNetCore.Mvc;
 using DotNetAPILearn.Dtos;
+using AutoMapper;
 
 namespace DotNetAPILearn.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserControllerEF : ControllerBase
+public class UserControllerEF(IConfiguration config) : ControllerBase
 {
-    DataContextEF _entityFramework;
-    public UserControllerEF(IConfiguration config)
-    {
-        _entityFramework = new DataContextEF(config);
-    }
-
+    DataContextEF _entityFramework = new(config);
+    IMapper _mapper = new Mapper(new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<UserToAddDto, User>();
+            cfg.CreateMap<UserSalary, UserSalary>();
+            cfg.CreateMap<UserJobInfo, UserJobInfo>();
+        }));
 
 
     [HttpGet("GetUsers")]
@@ -38,15 +40,12 @@ public class UserControllerEF : ControllerBase
 
 
     [HttpPost("AddUser")]
-    public IActionResult AddUser(UserDto user)
+    public IActionResult AddUser(UserToAddDto user)
     {
-        User userDb = new User();
-        userDb.Active = user.Active;
-        userDb.LastName = user.LastName;
-        userDb.FirstName = user.FirstName;
-        userDb.Gender = user.Gender;
-        userDb.Email = user.Email;
-        _entityFramework.Add(userDb);
+        User userToAdd = _mapper.Map<User>(user);
+
+
+        _entityFramework.Add(userToAdd);
         if (_entityFramework.SaveChanges() > 0)
             return Ok();
 
@@ -59,13 +58,10 @@ public class UserControllerEF : ControllerBase
     {
         User? userDb = _entityFramework.Users
                 .Where(u => u.UserId == user.UserId).FirstOrDefault();
+
         if (userDb != null)
         {
-            userDb.Active = user.Active;
-            userDb.LastName = user.LastName;
-            userDb.FirstName = user.FirstName;
-            userDb.Gender = user.Gender;
-            userDb.Email = user.Email;
+            _mapper.Map(user, userDb);
 
             if (_entityFramework.SaveChanges() > 0)
                 return Ok();
