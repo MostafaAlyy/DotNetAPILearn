@@ -95,6 +95,9 @@ public class UserControllerEF(IConfiguration config) : ControllerBase
 
 
 
+
+
+
     [HttpGet("GetUsersSalary")]
     public IEnumerable<UserSalary> GetUsersSalary()
     {
@@ -163,4 +166,74 @@ public class UserControllerEF(IConfiguration config) : ControllerBase
         throw new Exception("Failed to get user salary");
     }
 
+
+
+
+    [HttpGet("GetUsersJobInfo")]
+    public IEnumerable<UserJobInfo> GetUsersJobInfo()
+    {
+        return _entityFramework.UsersJobInfo;
+    }
+
+    [HttpGet("GetUserJobInfo/{userId}")]
+    public UserJobInfo GetUserJobInfo(int userId)
+    {
+        UserJobInfo? userJobInfo = _entityFramework.UsersJobInfo.Where(u => u.UserId == userId).FirstOrDefault();
+        if (userJobInfo != null)
+            return userJobInfo;
+
+        throw new Exception("Failed to get user JobInfo");
+    }
+
+    [HttpPost("AddUserJobInfo")]
+    public IActionResult AddUserJobInfo(UserJobInfo userJobInfo)
+    {
+
+        _entityFramework.Add(userJobInfo);
+        if (_entityFramework.SaveChanges() > 0)
+            return Ok();
+
+        throw new Exception("Failed to add user JobInfo");
+
+    }
+
+    [HttpPut("UpdateUserJobInfo")]
+    public IActionResult UpdateUserJobInfo(UserJobInfo userJobInfo)
+    {
+        UserJobInfo? userJobInfoDb = _entityFramework.UsersJobInfo.Where(u => u.UserId == userJobInfo.UserId).FirstOrDefault();
+
+        if (userJobInfo != null)
+        {
+            _mapper.Map(userJobInfo, userJobInfoDb);
+
+            if (_entityFramework.SaveChanges() > 0)
+                return Ok();
+
+            throw new Exception("Failed to update user JobInfo");
+        }
+
+        throw new Exception("Failed to get user JobInfo");
+
+    }
+
+    [HttpDelete("DeleteUserJobInfo{userId}")]
+    public IActionResult DeleteUserJobInfo(int userId)
+    {
+        UserJobInfo? userJobInfoDb = _entityFramework.UsersJobInfo
+       .Where(u => u.UserId == userId).FirstOrDefault();
+
+        if (userJobInfoDb != null)
+        {
+            _entityFramework.UsersJobInfo.Remove(userJobInfoDb);
+
+            if (_entityFramework.SaveChanges() > 0)
+                return Ok();
+
+
+            throw new Exception("Failed to delete user JobInfo");
+        }
+
+
+        throw new Exception("Failed to get user JobInfo");
+    }
 }
