@@ -8,7 +8,7 @@ namespace DotNetAPILearn.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserControllerEF(IConfiguration config, IUserRepo userRepo) : ControllerBase
+public class UserControllerEF(IUserRepo userRepo) : ControllerBase
 {
     // readonly DataContextEF _entityFramework = new(config);
 
