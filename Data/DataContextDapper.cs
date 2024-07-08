@@ -8,7 +8,7 @@ namespace DotNetAPILearn.Data
     class DataContextDapper
     {
         private readonly IConfiguration _config;
-        private readonly IDbConnection _dbConnection;
+        private readonly SqlConnection _dbConnection;
 
         public DataContextDapper(IConfiguration config)
         {
@@ -32,12 +32,24 @@ namespace DotNetAPILearn.Data
         }
         public int ExecuteSqlWithCount(string sql)
         {
-            IDbConnection dbConnection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             return _dbConnection.Execute(sql);
         }
 
 
+        public bool ExecuteSqlWithParameters(string sql, List<SqlParameter> parameters)
+        {
+            SqlCommand sqlCommand = new(sql);
 
+            foreach (SqlParameter parameter in parameters)
+                sqlCommand.Parameters.Add(parameter);
+
+            _dbConnection.Open();
+            sqlCommand.Connection = _dbConnection;
+
+            int rowAffected = sqlCommand.ExecuteNonQuery();
+            _dbConnection.Close();
+            return rowAffected > 0;
+        }
 
     }
 }
