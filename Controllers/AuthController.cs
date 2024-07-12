@@ -54,8 +54,29 @@ namespace DotNetAPILearn.Controllers
             byte[] passwordHash = GeneratePasswordHash(userForRegisterDto.Password, passwordSalt);
 
             InsertUserAuth(email: userForRegisterDto.Email, passwordSalt: passwordSalt, passwordHash: passwordHash);
-
+            AddUser(userForRegisterDto);
             return Ok();
+        }
+
+        private void AddUser(UserForRegisterDto user)
+        {
+            string sql = $@"
+            INSERT INTO TutorialAppSchema.Users (
+                    FirstName
+                    ,LastName
+                    ,Email
+                    ,Gender
+                    ,Active)
+            VALUES (
+                    '{user.FirstName}'
+                    ,'{user.LastName}'
+                    ,'{user.Email}'
+                    ,'{user.Gender}'
+                    ,1
+                );";
+            if (!_dapper.ExecuteSql(sql))
+                throw new Exception("Failed to add user");
+
         }
 
         bool IsUserEmailExist(string Email)
