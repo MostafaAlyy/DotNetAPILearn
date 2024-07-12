@@ -17,8 +17,25 @@ namespace DotNetAPILearn.Controllers
 
 
         [HttpPost("Login")]
-        public IActionResult Login()
+        public IActionResult Login(UserForLoginDto userForLoginDto)
         {
+            string sql = $@"
+            SELECT PasswordHash,PasswordSalt
+            FROM TutorialAppSchema.Auth
+            WHERE Email = '{userForLoginDto.Email}'";
+
+            UserForLoginConfirmationDto userForLoginConfirmationDto = _dapper.LoadDataSingle<UserForLoginConfirmationDto>(sql);
+
+            byte[] passwordHash = GeneratePasswordHash(userForLoginDto.Password, userForLoginConfirmationDto.PasswordSalt);
+
+
+            for (int i = 0; i < passwordHash.Length; i++)
+            {
+                if (passwordHash[i] != userForLoginConfirmationDto.PasswordHash[i])
+                    return StatusCode(401, "Incorrect Password");
+            }
+
+
             return Ok();
         }
         [HttpPost("Register")]
@@ -31,11 +48,10 @@ namespace DotNetAPILearn.Controllers
                 throw new Exception("User email already exist");
 
 
-            byte[] passwordSalt = new byte[128 / 8];
-            string passwordSaltPlusString = GeneratePasswordSalt(ref passwordSalt);
 
-            byte[] passwordHash = GeneratePasswordHash(userForRegisterDto.Password, passwordSaltPlusString);
+            byte[] passwordSalt = GeneratePasswordSalt();
 
+            byte[] passwordHash = GeneratePasswordHash(userForRegisterDto.Password, passwordSalt);
 
             InsertUserAuth(email: userForRegisterDto.Email, passwordSalt: passwordSalt, passwordHash: passwordHash);
 
@@ -55,18 +71,21 @@ namespace DotNetAPILearn.Controllers
 
         }
 
-        string GeneratePasswordSalt(ref byte[] passwordSalt)
+        byte[] GeneratePasswordSalt()
         {
 
+            byte[] passwordSalt = new byte[128 / 8];
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
                 rng.GetNonZeroBytes(passwordSalt);
             }
-            return _config.GetSection("AppSettings:PasswordKey").Value + Convert.ToBase64String(passwordSalt);
+            return passwordSalt;
         }
 
-        byte[] GeneratePasswordHash(string password, string passwordSaltPlusString)
+        byte[] GeneratePasswordHash(string password, byte[] passwordSalt)
         {
+            string passwordSaltPlusString = _config.GetSection("AppSettings:PasswordKey").Value +
+                Convert.ToBase64String(passwordSalt);
             return KeyDerivation.Pbkdf2(
                 password: password,
                 salt: Encoding.ASCII.GetBytes(passwordSaltPlusString),
