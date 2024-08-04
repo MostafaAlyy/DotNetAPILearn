@@ -10,6 +10,8 @@ public class Post
     public DateTime PostUpdated { get; set; }
 
     Post()
+
+
     {
         PostContent ??= "";
         PostTitle ??= "";
