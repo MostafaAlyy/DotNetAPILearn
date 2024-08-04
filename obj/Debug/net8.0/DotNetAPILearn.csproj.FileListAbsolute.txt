@@ -82,3 +82,4 @@ d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 d:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\Backend\.NET\DotNetAPILearn\bin\Debug\net8.0\Npgsql.dll
